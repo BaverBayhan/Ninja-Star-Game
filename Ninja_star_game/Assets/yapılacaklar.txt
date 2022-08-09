@@ -1,0 +1,20 @@
+---> UI(Health bar(done),bullet amount counter(done)-additional:bullet colors and keys(done)-,coin counter,coin system)
+
+---> Environment(Skybox, plane regulations,light)
+
+---> Camera(done)
+
+---> Audio
+
+---> Menu
+
+---> Basic AI to track user(user's current plane)
+
+---> make game scene responsive 
+
+/********* ADDITIONAL *********/
+
+--> Diversified enemy class
+
+--> Basic AI for high level enemies
+

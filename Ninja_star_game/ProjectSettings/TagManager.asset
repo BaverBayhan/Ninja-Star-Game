@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - plane_parent
+  - loot
+  - bullet
+  - user
+  - enemy
+  - Undefined
+  - brown_bullet_loot
+  - gold_bullet_loot
+  - metallic_bullet_loot
+  - heart_loot
+  - enemy_cube
+  - barrier
+  - fist_enemy
+  - rotating_enemy
+  - fist
+  - stick
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - User
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
