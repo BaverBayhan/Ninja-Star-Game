@@ -20,6 +20,7 @@ TagManager:
   - rotating_enemy
   - fist
   - stick
+  - wall
   layers:
   - Default
   - TransparentFX

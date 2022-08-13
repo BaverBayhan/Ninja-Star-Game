@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3389715399331356537}
   m_Layer: 0
   m_Name: bullet_gold
-  m_TagString: Untagged
+  m_TagString: user_bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d77705c5ddb3e499789766c3f66892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity_parameter: 122.2
+  velocity_parameter: 210
 --- !u!54 &3389715399331356537
 Rigidbody:
   m_ObjectHideFlags: 0

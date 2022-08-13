@@ -26,6 +26,6 @@ public class camera : MonoBehaviour
     private void smooth_factor_updater()
     {
         time_checker += Time.deltaTime;
-        if(time_checker >4) { smooth_factor*=1.1f; time_checker=0; }
+        if(time_checker >4) { time_checker=0; smooth_factor*=1.0473f; }
     }
 }

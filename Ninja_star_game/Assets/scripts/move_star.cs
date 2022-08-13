@@ -4,7 +4,7 @@ using System.Collections;
 public class move_star : MonoBehaviour
 {
     float death_time=0;
-    [Range(-200f, 200f)]
+    [Range(-300f, 400f)]
     [SerializeField] float velocity_parameter;
     void Update()
     { 

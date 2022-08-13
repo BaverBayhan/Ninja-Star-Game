@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 2814518724710490137}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,7 +151,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2814518724710490150}
   serializedVersion: 2
-  m_Mass: 10000
+  m_Mass: 100000
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -278,7 +278,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2814518724944605855}
   serializedVersion: 2
-  m_Mass: 7.23
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0

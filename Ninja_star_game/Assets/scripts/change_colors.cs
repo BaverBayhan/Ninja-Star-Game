@@ -107,7 +107,6 @@ public class change_colors : MonoBehaviour
     void move_planes()
     {
         Vector3 initial_velocity = new Vector3(0, 0, uc.speed_parameter*Time.deltaTime);
-        print(uc.speed_parameter);
         gameObject.transform.Translate(initial_velocity);
     }
     

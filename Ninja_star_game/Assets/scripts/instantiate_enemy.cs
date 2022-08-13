@@ -26,9 +26,9 @@ public class instantiate_enemy : MonoBehaviour
                 {
                     new_enemy.transform.position=new Vector3(x_pos[(int)Random.Range(0, 3)], 3, checker+offset);
                 }
-                else if(new_enemy.tag=="barrier")
+                else if(new_enemy.tag=="wall")
                 {
-                    new_enemy.transform.position=new Vector3(x_pos[(int)Random.Range(0, 3)], 1.75f, checker+offset);
+                    new_enemy.transform.position=new Vector3(x_pos[(int)Random.Range(0, 3)], 1.75f, checker+offset+1);
                 }
                 else if(new_enemy.tag=="fist_enemy")
                 {

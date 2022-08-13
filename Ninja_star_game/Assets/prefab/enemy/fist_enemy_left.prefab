@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8420125160379799057}
   - component: {fileID: 8420125160379799053}
   - component: {fileID: -109757589426627499}
+  - component: {fileID: 5731763981428386005}
   m_Layer: 0
   m_Name: fist_enemy_left
   m_TagString: fist_enemy
@@ -127,6 +128,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00b37ac9969472849a0796090288dd16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5731763981428386005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8420125160379799062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb4e5dafa198d0419cedb5db6dd20de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8420125160589752837
@@ -332,7 +345,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8420125160988404318}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

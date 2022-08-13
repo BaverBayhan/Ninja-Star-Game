@@ -19,7 +19,7 @@ public class enemy_controller: MonoBehaviour
     [SerializeField] GameObject gold_bullet_loot;
     [SerializeField] GameObject metallic_bullet_loot;
     [SerializeField] Vector3 offset;
-    GameObject[] loot_list;
+    [SerializeField] GameObject[] loot_list=new GameObject[5];
     private float global_shoot_interval;
 
     private void Awake()
@@ -37,7 +37,6 @@ public class enemy_controller: MonoBehaviour
         isLeftTrigerredHash=Animator.StringToHash("IsLeft");
         isRightTrigerredHash=Animator.StringToHash("IsRight");
         /*********** LOOT LIST CREATION *****************/
-        loot_list=new GameObject[] { health_loot, brown_bullet_loot, gold_bullet_loot, metallic_bullet_loot };
     }
     private void FixedUpdate()
     {
@@ -51,7 +50,10 @@ public class enemy_controller: MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Color bullet_color = collision.gameObject.GetComponent<MeshRenderer>().material.color;
-        Destroy(collision.gameObject);
+        if (collision.gameObject.tag=="user_bullet")
+        {
+            Destroy(collision.gameObject);
+        }
         if (gameObject.GetComponent<MeshRenderer>().material.color ==bullet_color)
         {
             enemy_health-=damage_of_same_color_bullet;
@@ -77,7 +79,7 @@ public class enemy_controller: MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.15f);
         animator.SetBool(IsDestroyedHash, false);
-        int rand_num = Random.Range(0, 4);
+        int rand_num = Random.Range(0, 5);
         Instantiate(loot_list[rand_num], transform.position, loot_list[rand_num].transform.rotation);
         Destroy(gameObject);
 

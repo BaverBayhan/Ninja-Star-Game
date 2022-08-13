@@ -8,7 +8,7 @@ public class user_controller : MonoBehaviour
     [SerializeField] GameObject brown_bullet;
     [SerializeField] GameObject metalic_bullet;
     [SerializeField] GameObject plane_parent;
-    [HideInInspector] public float speed_parameter;
+    public float speed_parameter;
 
     float decrease_health_parameter;
     Slider slider;
@@ -136,12 +136,13 @@ public class user_controller : MonoBehaviour
     {
         if(collision.gameObject.tag == "bullet")
         {
-            health-=12f;
+            health-=8f;
             update_slider();
         }
         else if(collision.gameObject.tag=="heart_loot")
         {
-            health+=20;
+            if (health<=80) { health+=20; }
+            else { health=100; }
             Destroy(collision.gameObject);
             update_slider();
         }
@@ -165,15 +166,20 @@ public class user_controller : MonoBehaviour
         }
         else if(collision.gameObject.tag=="fist")
         {
-            health-=15;
+            health-=13;
             update_slider();
-            print("collusyon oldu");
         }
         else if (collision.gameObject.tag=="stick")
         {
             health-=10;
             update_slider();
         }
+        else if(collision.gameObject.tag=="fist_enemy" || collision.gameObject.tag=="wall" || collision.gameObject.tag=="enemy_cube")
+        {
+            print("carpisma oldu isim : "+collision.gameObject.tag);
+            health-=6;
+        }
+
     }
     void move_right()
     {
@@ -316,7 +322,8 @@ public class user_controller : MonoBehaviour
         if (time_checker > 4)
         {
             time_checker=0;
-            speed_parameter*=1.11f;
+            speed_parameter*=1.0473f;
+            /** 1.059 :  this value doubles the speed in 60 seconds approximately **/
         }
     }
 }
