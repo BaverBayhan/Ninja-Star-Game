@@ -10,7 +10,7 @@ public class user_controller : MonoBehaviour
     [SerializeField] GameObject plane_parent;
     public float speed_parameter;
 
-    float decrease_health_parameter;
+    [SerializeField] float decrease_health_parameter;
     Slider slider;
 
     Vector3 position_default;
@@ -22,7 +22,6 @@ public class user_controller : MonoBehaviour
     Animator animator;
     private int isRightTrigerredHash;
     private int isLeftTrigerredHash;
-    private int isDodgedHash;
     private int isJumpedHash;
     [HideInInspector] public float time_checker = 1;
 
@@ -38,6 +37,10 @@ public class user_controller : MonoBehaviour
 
     int move_user_activation_counter;
 
+
+    [HideInInspector] public Vector2 touch_first_pos;
+    [HideInInspector] public Vector2 touch_control_pos;
+
     private void Awake()
     {
         ui_script = GameObject.FindObjectOfType<UI_script>();
@@ -47,7 +50,6 @@ public class user_controller : MonoBehaviour
 
         move_user_activation_counter=0;
         /************************* UI ******************/
-        decrease_health_parameter = 3.05f ;
         slider = GameObject.FindWithTag("GameController").GetComponent<Slider>();
         health=110;
         slider.value = health/100;
@@ -65,7 +67,6 @@ public class user_controller : MonoBehaviour
         animator = GetComponent<Animator>();
         isRightTrigerredHash=Animator.StringToHash("IsTrigerredRight");
         isLeftTrigerredHash=Animator.StringToHash("IsTrigerredLeft");
-        isDodgedHash=Animator.StringToHash("IsDodge");
         isJumpedHash=Animator.StringToHash("IsJumped");
 
         /******************* MOVING USER *****************/
@@ -73,53 +74,12 @@ public class user_controller : MonoBehaviour
     }
     void Update()
     {
-
         StartCoroutine(move_user());
         increase_speed();
-
         /***************** MOVING ****************/
-        bool pressed_RightArrow = Input.GetKeyDown(KeyCode.RightArrow);
-        bool release_RightArrow = Input.GetKeyUp(KeyCode.RightArrow);
-        bool pressed_LeftArrow = Input.GetKeyDown(KeyCode.LeftArrow);
-        bool release_LeftArrow = Input.GetKeyUp(KeyCode.LeftArrow);
-        bool pressed_downArrow=Input.GetKeyDown(KeyCode.DownArrow);
-        bool release_downArrow=Input.GetKeyUp(KeyCode.DownArrow);
-        bool pressed_space=Input.GetKeyDown(KeyCode.Space);
-        bool release_space=Input.GetKeyUp(KeyCode.Space);
-        if(pressed_space)
-        {
-            jump();
-        }
-        else if(release_space)
-        {
-            jump_cancel();
-        }
-        if(pressed_RightArrow)
-        {
-            move_right();
-        }
-        else if (release_RightArrow)
-        {
-            move_right_cancel();
-        }
-        if(pressed_LeftArrow)
-        {
-            move_left();
-        }
-        else if(release_LeftArrow)
-        {
-            move_left_cancel();
-        }
-        if(pressed_downArrow)
-        {
-            dodge();
-        }
-        else if(release_downArrow)
-        {
-            dodge_cancel();
-        }
+        touch_controller();
         /***************** SHOTING ****************/
-        create_star();
+        
     }
     private void FixedUpdate()
     {
@@ -141,7 +101,7 @@ public class user_controller : MonoBehaviour
         }
         else if(collision.gameObject.tag=="heart_loot")
         {
-            if (health<=80) { health+=20; }
+            if (health<=84) { health+=16; }
             else { health=100; }
             Destroy(collision.gameObject);
             update_slider();
@@ -176,7 +136,6 @@ public class user_controller : MonoBehaviour
         }
         else if(collision.gameObject.tag=="fist_enemy" || collision.gameObject.tag=="wall" || collision.gameObject.tag=="enemy_cube")
         {
-            print("carpisma oldu isim : "+collision.gameObject.tag);
             health-=6;
         }
 
@@ -221,34 +180,7 @@ public class user_controller : MonoBehaviour
         }
 
     }
-    void create_star()
-    {
-        GameObject instantaniated_star;
-        bool Z_pressed = Input.GetKeyDown(KeyCode.Z);
-        bool X_pressed= Input.GetKeyDown(KeyCode.X);
-        bool C_pressed=Input.GetKeyDown(KeyCode.C);
-        if (Z_pressed && ui_script.brown_val>0)
-        {
-            instantaniated_star = Instantiate(brown_bullet, transform.position, transform.rotation);
-            instantaniated_star.transform.position=new Vector3(transform.position.x, transform.position.y, transform.position.z+2);
-            ui_script.brown_val-=1;
-            brown_text.text=ui_script.brown_val.ToString();
-        }
-        else if(X_pressed && ui_script.gold_val>0)
-        {
-            instantaniated_star = Instantiate(gold_bullet, transform.position, transform.rotation);
-            instantaniated_star.transform.position=new Vector3(transform.position.x, transform.position.y, transform.position.z+2);
-            ui_script.gold_val-=1;
-            gold_text.text=ui_script.gold_val.ToString();   
-        }
-        else if(C_pressed && ui_script.metallic_val>0)
-        {
-            instantaniated_star = Instantiate(metalic_bullet,transform.position,transform.rotation);
-            instantaniated_star.transform.position=new Vector3(transform.position.x, transform.position.y, transform.position.z+2);
-            ui_script.metallic_val-=1;
-            metallic_text.text=ui_script.metallic_val.ToString();   
-        }
-    }
+    
     void user_plane_color_checker()
     {
         Vector3 gameobject_current_pos=new Vector3(transform.position.x,transform.position.y,transform.position.z);
@@ -293,16 +225,7 @@ public class user_controller : MonoBehaviour
             }
         }
     }
-    void dodge()
-    {
-        animator.SetBool(isDodgedHash, true);
-        gameObject.GetComponent<Collider>().isTrigger = true;
-    }
-    void dodge_cancel()
-    {
-        animator.SetBool(isDodgedHash, false);
-        gameObject.GetComponent<Collider>().isTrigger = false;
-    }
+
     void jump()
     {
         animator.SetBool(isJumpedHash, true);
@@ -324,6 +247,43 @@ public class user_controller : MonoBehaviour
             time_checker=0;
             speed_parameter*=1.0473f;
             /** 1.059 :  this value doubles the speed in 60 seconds approximately **/
+        }
+    }
+
+    void touch_controller()
+    {
+        if (Input.touchCount>0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if(touch.phase==TouchPhase.Began)
+            {
+                touch_first_pos = new Vector2(touch.position.x,touch.position.y);
+            }
+            else if(touch.phase==TouchPhase.Moved)
+            {
+                touch_control_pos = touch.position;
+                if (touch_control_pos.y - touch_first_pos.y>55)
+                {
+                    jump();
+                }
+                else if(touch_control_pos.y - touch_first_pos.y<=55)
+                {
+                    if(touch_control_pos.x-touch_first_pos.x>30)
+                    {
+                        move_right();
+                    }
+                    else if(touch_first_pos.x-touch_control_pos.x>30)
+                    {
+                        move_left();
+                    }
+                }
+            }
+            else if(touch.phase== TouchPhase.Ended)
+            {
+                move_right_cancel();
+                move_left_cancel();
+                jump_cancel();
+            }
         }
     }
 }

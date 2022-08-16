@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class fist_enemy_collision_controller : MonoBehaviour
 {
-    private int rigid_body_controller=0;
     void FixedUpdate()
     {
         RayController();

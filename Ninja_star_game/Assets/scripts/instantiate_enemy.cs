@@ -18,7 +18,7 @@ public class instantiate_enemy : MonoBehaviour
     {
         if (user_transform.position.z>checker-80 || user_transform.position.z>checker-60 || user_transform.position.z >checker/1.25)
         {
-            for (i=0;i<4;i++)
+            for (i=0;i<6;i++)
             {
                 offset=65*i;
                 GameObject new_enemy = Instantiate(enemy_list[(int)Random.Range(0, 5)]);

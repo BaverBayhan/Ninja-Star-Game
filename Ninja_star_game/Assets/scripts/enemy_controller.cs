@@ -11,7 +11,6 @@ public class enemy_controller: MonoBehaviour
     private int isLeftTrigerredHash;
     private int left_bool_flag;
     private int right_bool_flag;
-    private int i=0;
     [SerializeField,HideInInspector] GameObject User;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject health_loot;

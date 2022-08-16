@@ -10,7 +10,7 @@ public class scene_management_game : MonoBehaviour
     }
     private void Update()
     {
-        IsGameEnded();
+      
     }
     public void IsGameEnded()
     {
